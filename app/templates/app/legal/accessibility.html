@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Accessibility - PrivyVote{% endblock %}
+
+{% block page %}
+<!-- Page Header -->
+<header class="bg-primary text-white py-4 mb-0">
+  <div class="container">
+    <h1 class="mb-0">Accessibility</h1>
+    <p class="mb-4">
+      PrivyVote is designed to provide a clear, simple, and usable voting experience for all users.
+    </p>
+  </div>
+</header>
+
+{% include 'app/partials/breadcrumbs.html' %}
+
+<!-- Content Section -->
+<article class="container py-5">
+
+  <div class="card border-0 bg-light p-4 mb-5">
+    <h2 class="h4 fw-semibold mb-3">Our Accessibility Goal</h2>
+    <p class="mb-0 text-muted">
+      We aim to make the voting platform easier to use for people with visual, motor, and cognitive challenges by
+      providing readable layouts, simple navigation, keyboard-friendly interaction, and clear instructions.
+    </p>
+  </div>
+
+  <div class="row g-4 mb-5">
+    <div class="col-md-6">
+      <div class="card h-100 border-0">
+        <div class="card-header border-0">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-eye me-2"></i>Visual Accessibility
+          </h5>
+        </div>
+        <div class="card-body p-4">
+          <p class="card-subtitle text-muted mb-3">
+            Better readability and easier interface visibility
+          </p>
+          <ul class="list-unstyled text-start mb-0">
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Readable color contrast</li>
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Clear text hierarchy</li>
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Large and readable buttons</li>
+            <li class="mb-0"><i class="bi bi-check-circle text-success me-2"></i>Simple page structure</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card h-100 border-0">
+        <div class="card-header border-0">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-keyboard me-2"></i>Keyboard Accessibility
+          </h5>
+        </div>
+        <div class="card-body p-4">
+          <p class="card-subtitle text-muted mb-3">
+            Easier navigation without depending only on a mouse
+          </p>
+          <ul class="list-unstyled text-start mb-0">
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Keyboard-friendly navigation</li>
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Accessible forms and buttons</li>
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Logical page flow</li>
+            <li class="mb-0"><i class="bi bi-check-circle text-success me-2"></i>Reduced interaction complexity</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card h-100 border-0">
+        <div class="card-header border-0">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-hand-index me-2"></i>Motor Accessibility
+          </h5>
+        </div>
+        <div class="card-body p-4">
+          <p class="card-subtitle text-muted mb-3">
+            Easier controls for users with limited movement precision
+          </p>
+          <ul class="list-unstyled text-start mb-0">
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Large click areas</li>
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Simple form interaction</li>
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Clear button placement</li>
+            <li class="mb-0"><i class="bi bi-check-circle text-success me-2"></i>Reduced unnecessary steps</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card h-100 border-0">
+        <div class="card-header border-0">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-lightbulb me-2"></i>Cognitive Accessibility
+          </h5>
+        </div>
+        <div class="card-body p-4">
+          <p class="card-subtitle text-muted mb-3">
+            Clear content and understandable user flow
+          </p>
+          <ul class="list-unstyled text-start mb-0">
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Simple language</li>
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Step-by-step guidance</li>
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Clear labels and instructions</li>
+            <li class="mb-0"><i class="bi bi-check-circle text-success me-2"></i>Minimal confusion during voting</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mb-5 border-0">
+    <div class="card-header border-0">
+      <h5 class="card-title mb-0"><i class="bi bi-devices me-2"></i>Device Support</h5>
+    </div>
+    <div class="card-body">
+      <p class="mb-4">PrivyVote is designed to work across common device types.</p>
+      <div class="row text-center">
+        <div class="col-md-4 mb-3">
+          <i class="bi bi-display display-4 text-primary mb-2"></i>
+          <h4 class="h6">Desktop</h4>
+          <p class="text-muted small">Suitable for modern desktop browsers</p>
+        </div>
+        <div class="col-md-4 mb-3">
+          <i class="bi bi-phone display-4 text-primary mb-2"></i>
+          <h4 class="h6">Mobile</h4>
+          <p class="text-muted small">Responsive layout for smaller screens</p>
+        </div>
+        <div class="col-md-4 mb-3">
+          <i class="bi bi-tablet display-4 text-primary mb-2"></i>
+          <h4 class="h6">Tablet</h4>
+          <p class="text-muted small">Readable and touch-friendly interface</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4 mb-5">
+    <div class="col-md-6">
+      <div class="card h-100 border-0">
+        <div class="card-header border-0">
+          <h5 class="card-title mb-0"><i class="bi bi-translate me-2"></i>Language and Clarity</h5>
+        </div>
+        <div class="card-body">
+          <p>We focus on making the interface easy to understand.</p>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Simple page wording</li>
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Clear action labels</li>
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Consistent navigation</li>
+            <li class="mb-0"><i class="bi bi-check-circle text-success me-2"></i>Reduced interface clutter</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card h-100 border-0">
+        <div class="card-header border-0">
+          <h5 class="card-title mb-0"><i class="bi bi-question-circle me-2"></i>Help and Support</h5>
+        </div>
+        <div class="card-body">
+          <p>Users can report problems or ask for help through the contact page.</p>
+          <ul class="list-unstyled">
+            <li class="mb-2"><i class="bi bi-book text-info me-2"></i><strong>Guidance:</strong> Clear instructions are provided in key steps</li>
+            <li class="mb-3"><i class="bi bi-envelope text-info me-2"></i><strong>Support:</strong> Accessibility concerns can be reported through the contact form</li>
+          </ul>
+          <a href="{% url 'contact' %}" class="btn btn-info btn-sm">
+            <i class="bi bi-headset me-1"></i>Get Help
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mb-5 border-0">
+    <div class="card-header border-0">
+      <h5 class="card-title mb-0"><i class="bi bi-award me-2"></i>Accessibility Statement</h5>
+    </div>
+    <div class="card-body">
+      <p class="mb-0">
+        PrivyVote is developed with a focus on usability, readability, and simpler interaction. Accessibility
+        improvements will continue as the system evolves and is tested further.
+      </p>
+    </div>
+  </div>
+
+  <div class="card border-0">
+    <div class="card-header border-0">
+      <h5 class="card-title mb-0"><i class="bi bi-chat-dots me-2"></i>Your Feedback</h5>
+    </div>
+    <div class="card-body">
+      <p class="mb-4">Your feedback helps improve usability and accessibility.</p>
+      <div class="d-flex flex-wrap gap-2">
+        <a href="{% url 'contact' %}" class="btn btn-outline-primary">
+          <i class="bi bi-chat-square-text me-1"></i>Give Feedback
+        </a>
+        <a href="{% url 'contact' %}" class="btn btn-outline-primary">
+          <i class="bi bi-envelope me-1"></i>Contact Support
+        </a>
+      </div>
+    </div>
+  </div>
+
+</article>
+{% endblock %}

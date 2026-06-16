@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block page %}
+<div class="container mt-4">
+    <h2>Voter Registration</h2>
+    <p><strong>{{ election.name }}</strong></p>
+    <p>{{ election.description }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            {{ form.full_name }}
+            {% if form.full_name.errors %}
+                <div class="text-danger small mt-1">{{ form.full_name.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Mobile Number</label>
+            {{ form.phone_number }}
+            {% if form.phone_number.errors %}
+                <div class="text-danger small mt-1">{{ form.phone_number.errors }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,80 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="{% url 'index' %}">
+      <span class="fs-4">🗳️</span>
+      <span>PrivyVote</span>
+    </a>
+
+    <button
+      class="navbar-toggler border-0 shadow-none"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+        <li class="nav-item">
+          <a class="nav-link px-3 {% if request.resolver_match.url_name == 'election_list' %}active fw-semibold{% endif %}"
+             href="{% url 'election_list' %}">
+            Elections
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3 {% if request.resolver_match.url_name == 'how' %}active fw-semibold{% endif %}"
+             href="{% url 'how' %}">
+            How It Works
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3 {% if request.resolver_match.url_name == 'faqs' %}active fw-semibold{% endif %}"
+             href="{% url 'faqs' %}">
+            FAQs
+          </a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+        {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link px-3 {% if request.resolver_match.url_name == 'profile' %}active fw-semibold{% endif %}"
+               href="{% url 'profile' %}">
+              {{ request.user.get_full_name|default:request.user.get_username }}
+            </a>
+          </li>
+
+          {% if request.user.is_superuser %}
+            <li class="nav-item">
+              <a class="nav-link px-3" href="{% url 'admin:index' %}">
+                Admin Panel
+              </a>
+            </li>
+          {% endif %}
+
+          <li class="nav-item ms-lg-2">
+            <form method="post" action="{% url 'account_logout' %}" class="d-inline">
+              {% csrf_token %}
+              <button
+                type="submit"
+                class="btn btn-light btn-sm px-3 rounded-pill fw-semibold"
+              >
+                Logout
+              </button>
+            </form>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="btn btn-light btn-sm px-3 rounded-pill fw-semibold" href="{% url 'account_login' %}">
+              Login
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>

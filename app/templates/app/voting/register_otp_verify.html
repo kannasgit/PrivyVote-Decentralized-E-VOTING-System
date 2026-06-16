@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block page %}
+<div class="container mt-4">
+    <h2>Verify Registration OTP</h2>
+    <p><strong>{{ election.name }}</strong></p>
+    <p>Enter the OTP sent to mobile ending with <strong>{{ phone_last2 }}</strong></p>
+
+    {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label class="form-label">OTP</label>
+            {{ form.otp }}
+            {% if form.otp.errors %}
+                <div class="text-danger small mt-1">
+                    {{ form.otp.errors }}
+                </div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Verify OTP</button>
+    </form>
+</div>
+{% endblock %}

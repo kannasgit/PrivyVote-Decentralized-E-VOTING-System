@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Privacy Policy - PrivyVote{% endblock %}
+
+{% block page %}
+<!-- Page Header -->
+<header class="bg-primary text-white py-4 mb-0">
+  <div class="container">
+    <h1 class="mb-0">Privacy Policy</h1>
+    <p class="mb-4">How PrivyVote handles and protects user information</p>
+  </div>
+</header>
+
+{% include 'app/partials/breadcrumbs.html' %}
+
+<!-- Content Section -->
+<article class="container py-5">
+
+  <div class="card border-0">
+    <div class="card-body p-4">
+      <p class="text-muted mb-5">
+        <small>Last updated: {% now "F Y" %}</small>
+      </p>
+
+      <section class="mb-5">
+        <h3 class="h4 mb-3">1. Information We Collect</h3>
+        <p>PrivyVote collects limited information required for authentication, election participation, and system operation.</p>
+        <ul>
+          <li><strong>Account Information:</strong> Basic user details such as username, email, or profile-related data used in the system</li>
+          <li><strong>Verification Information:</strong> Identity-related input used for voter verification through salted hashing</li>
+          <li><strong>Voting Data:</strong> Encrypted ballot data and election participation records</li>
+          <li><strong>Technical Data:</strong> Basic system and browser data required for platform operation and security monitoring</li>
+        </ul>
+      </section>
+
+      <section class="mb-5">
+        <h3 class="h4 mb-3">2. How We Use Information</h3>
+        <p>We use collected information only for the core operation of the voting platform.</p>
+        <ul>
+          <li>To authenticate users and verify voter eligibility</li>
+          <li>To prevent duplicate voting</li>
+          <li>To store encrypted ballots securely</li>
+          <li>To support election integrity and auditability</li>
+          <li>To maintain and improve system performance and reliability</li>
+        </ul>
+      </section>
+
+      <section class="mb-5">
+        <h3 class="h4 mb-3">3. Identity Protection</h3>
+        <p>
+          PrivyVote is designed to reduce direct exposure of sensitive identity information.
+          Identity-related values used for voter verification are processed using salted hashing
+          instead of being stored in plain readable form wherever applicable in the system design.
+        </p>
+      </section>
+
+      <section class="mb-5">
+        <h3 class="h4 mb-3">4. Vote Privacy</h3>
+        <p>The privacy of each voter’s ballot is a core design goal of PrivyVote.</p>
+        <ul>
+          <li>Votes are stored in encrypted form</li>
+          <li>Individual ballot choices are not intended to be exposed in plaintext</li>
+          <li>Vote data is separated from direct voter identity wherever possible in the system workflow</li>
+          <li>Only final aggregated election results are intended to be published</li>
+        </ul>
+      </section>
+
+      <section class="mb-5">
+        <h3 class="h4 mb-3">5. Encryption and Secure Processing</h3>
+        <p>PrivyVote uses encryption-focused mechanisms to protect ballot confidentiality.</p>
+        <ul>
+          <li>Encrypted ballots are used for vote storage</li>
+          <li>Homomorphic tallying logic is used for secure result computation</li>
+          <li>Only the final aggregate result is decrypted at the end of the election process</li>
+          <li>The system is designed to avoid storing plaintext vote choices during normal voting flow</li>
+        </ul>
+      </section>
+
+      <section class="mb-5">
+        <h3 class="h4 mb-3">6. Blockchain Auditability</h3>
+        <p>
+          PrivyVote uses blockchain support as an audit layer to help maintain integrity of election-related records.
+          This helps reduce the risk of unauthorized modification after vote submission or result finalization.
+        </p>
+      </section>
+
+      <section class="mb-5">
+        <h3 class="h4 mb-3">7. Information Sharing</h3>
+        <p>PrivyVote does not share personal information for unrelated commercial purposes.</p>
+        <ul>
+          <li>Information may be viewed by authorized administrators only as required for platform management</li>
+          <li>Encrypted voting data may be processed as part of election operations</li>
+          <li>Information may be disclosed if required for academic review, demonstration, or lawful obligation</li>
+        </ul>
+      </section>
+
+      <section class="mb-5">
+        <h3 class="h4 mb-3">8. Data Retention</h3>
+        <p>
+          Data may be retained for the duration required to support election functionality, result validation,
+          audit review, and project demonstration needs. Retention behavior may vary depending on system configuration.
+        </p>
+      </section>
+
+      <section class="mb-5">
+        <h3 class="h4 mb-3">9. User Rights</h3>
+        <p>Users may request correction of account-related information where applicable.</p>
+        <ul>
+          <li>Users may review basic profile information stored in their account</li>
+          <li>Users may request correction of inaccurate account data</li>
+          <li>Encrypted vote records and finalized election records may not be altered once submitted, in order to preserve election integrity</li>
+        </ul>
+      </section>
+
+      <section class="mb-5">
+        <h3 class="h4 mb-3">10. Limitations</h3>
+        <p>
+          PrivyVote is an academic project focused on secure electronic voting concepts. While privacy and security
+          principles are built into the design, the platform should be understood within the scope of project
+          implementation, testing, and demonstration.
+        </p>
+      </section>
+
+      <section class="mb-5">
+        <h3 class="h4 mb-3">11. Policy Updates</h3>
+        <p>
+          This privacy policy may be updated when the project design, implementation, or documentation changes.
+          The latest version will always be shown on this page.
+        </p>
+      </section>
+
+      <section class="mb-0">
+        <h3 class="h4 mb-3">12. Contact</h3>
+        <p>
+          For questions about privacy or data handling, please
+          <a href="{% url 'contact' %}" class="text-decoration-none">contact us</a>.
+        </p>
+      </section>
+    </div>
+  </div>
+
+</article>
+{% endblock %}

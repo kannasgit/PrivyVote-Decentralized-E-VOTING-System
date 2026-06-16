@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+
+{% block page %}
+<!-- Hero Section -->
+<!-- Hero Section -->
+<section class="bg-primary text-white d-flex align-items-center py-5">
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-8 col-md-10 mx-auto text-center">
+
+        <h1 class="display-2 fw-semibold mb-4">
+          PrivyVote
+        </h1>
+
+        <p class="lead mb-4">
+          “Your identity stays hidden. Your vote stays secure.”
+        </p>
+
+        <p class="mb-5 text-white-50">
+          Built with privacy-first authentication, encrypted ballots, blockchain-backed integrity,
+          and one-time secure result computation.
+        </p>
+
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+          <a href="{% url 'how' %}" class="btn btn-light btn-lg">
+            <i class="bi bi-info-circle me-2"></i>How It Works
+          </a>
+
+          <a href="#features" class="btn btn-outline-light btn-lg">
+            <i class="bi bi-shield-check me-2"></i>Explore Features
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Elections Overview Section -->
+{% if elections_count.total > 0 %}
+<section class="bg-white py-5">
+  <div class="container">
+
+    {% if ongoing_elections %}
+    <div class="mb-5">
+      <div class="text-center mb-4">
+        <h2 class="h3 fw-semibold">Ongoing Elections</h2>
+        <p class="text-muted">Elections currently open for voting</p>
+      </div>
+      <div class="row g-4">
+        {% for election in ongoing_elections %}
+        <div class="col-lg-4">
+          {% include 'app/partials/election_card.html' with election=election %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if upcoming_elections %}
+    <div class="mb-5">
+      <div class="text-center mb-4">
+        <h2 class="h3 fw-semibold">Upcoming Elections</h2>
+        <p class="text-muted">Elections scheduled to begin soon</p>
+      </div>
+      <div class="row g-4">
+        {% for election in upcoming_elections %}
+        <div class="col-lg-4">
+          {% include 'app/partials/election_card.html' with election=election %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if recently_closed_elections %}
+    <div class="mb-5">
+      <div class="text-center mb-4">
+        <h2 class="h3 fw-semibold">Concluded Elections</h2>
+        <p class="text-muted">Recently completed elections and finalized results</p>
+      </div>
+      <div class="row g-4">
+        {% for election in recently_closed_elections %}
+        <div class="col-lg-4">
+          {% include 'app/partials/election_card.html' with election=election %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="text-center">
+      <a href="{% url 'election_list' %}" class="btn btn-outline-primary">
+        <i class="bi bi-list me-2"></i>View All Elections
+      </a>
+    </div>
+
+  </div>
+</section>
+
+{% else %}
+<section class="bg-white py-5">
+  <div class="container">
+    <div class="text-center py-5">
+      <div class="mb-4">
+        <i class="bi bi-card-checklist text-muted" style="font-size: 4rem;"></i>
+      </div>
+      <h3 class="fw-semibold mb-3">No Elections Available</h3>
+      <p class="lead text-muted mb-4">
+        There are currently no active or scheduled elections.
+      </p>
+      {% if request.user.is_authenticated %}
+        <a href="{% url 'profile' %}" class="btn btn-outline-primary">
+          <i class="bi bi-person me-2"></i>View Your Profile
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- Features Section -->
+<section id="features" class="py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="display-5 fw-semibold">Why PrivyVote?</h2>
+      <p class="lead text-muted">
+        Designed for privacy, integrity, and secure digital election handling
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-3 col-md-6">
+        <div class="card h-100 text-center border-0 shadow-sm">
+          <div class="card-body p-4">
+            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 4rem; height: 4rem;">
+              <i class="bi bi-person-check fs-4"></i>
+            </div>
+            <h4 class="h5 mb-3">Verified Access</h4>
+            <p class="text-muted mb-0">
+              Aadhaar or VID-based salted verification helps ensure only eligible users can vote.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="card h-100 text-center border-0 shadow-sm">
+          <div class="card-body p-4">
+            <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 4rem; height: 4rem;">
+              <i class="bi bi-lock fs-4"></i>
+            </div>
+            <h4 class="h5 mb-3">Encrypted Ballots</h4>
+            <p class="text-muted mb-0">
+              Votes are stored in encrypted form to reduce exposure of individual ballot choices.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="card h-100 text-center border-0 shadow-sm">
+          <div class="card-body p-4">
+            <div class="bg-warning text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 4rem; height: 4rem;">
+              <i class="bi bi-diagram-3 fs-4"></i>
+            </div>
+            <h4 class="h5 mb-3">Audit Trail</h4>
+            <p class="text-muted mb-0">
+              Blockchain-backed records support election integrity and reduce tampering risk.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="card h-100 text-center border-0 shadow-sm">
+          <div class="card-body p-4">
+            <div class="bg-info text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 4rem; height: 4rem;">
+              <i class="bi bi-bar-chart fs-4"></i>
+            </div>
+            <h4 class="h5 mb-3">One-Time Tally</h4>
+            <p class="text-muted mb-0">
+              Final results are computed through homomorphic aggregation and revealed only after election closure.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-5">
+      <a href="{% url 'how' %}" class="btn btn-outline-primary">
+        <i class="bi bi-question-circle me-2"></i>Learn How It Works
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

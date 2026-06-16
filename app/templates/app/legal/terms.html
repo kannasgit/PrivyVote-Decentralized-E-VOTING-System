@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Terms of Service - PrivyVote{% endblock %}
+
+{% block page %}
+<!-- Page Header -->
+<header class="bg-primary text-white py-4 mb-0">
+  <div class="container">
+    <h1 class="mb-0">Terms of Service</h1>
+    <p class="mb-4">Terms and conditions for using the PrivyVote electronic voting platform</p>
+  </div>
+</header>
+
+{% include 'app/partials/breadcrumbs.html' %}
+
+<!-- Content Section -->
+<article class="container py-5">
+
+  <div class="card border-0">
+    <div class="card-body p-4">
+      <p class="text-muted mb-5"><small>Last updated: {% now "F Y" %}</small></p>
+
+      <section class="mb-5">
+        <h3 class="h4 mb-3">1. Acceptance of Terms</h3>
+        <p>
+          PrivyVote is an academic electronic voting platform developed for secure digital voting, privacy protection,
+          and auditable result handling. By accessing or using this platform, you agree to these terms and conditions.
+        </p>
+      </section>
+
+      <section class="mb-5">
+        <h3 class="h4 mb-3">2. Eligibility</h3>
+        <p>To use this platform, you must:</p>
+        <ul>
+          <li>Have a valid account in the system</li>
+          <li>Be an eligible voter for the relevant election</li>
+          <li>Provide accurate information required for authentication or verification</li>
+          <li>Use the platform only for authorized election participation</li>
+        </ul>
+      </section>
+
+      <section class="mb-5">
+        <h3 class="h4 mb-3">3. User Responsibilities</h3>
+        <p>You agree to:</p>
+        <ul>
+          <li>Provide correct and complete information where required</li>
+          <li>Use the system only for lawful and authorized purposes</li>
+          <li>Not attempt to manipulate, disrupt, or interfere with election operations</li>
+          <li>Not impersonate another voter or misuse verification details</li>
+          <li>Keep your login credentials secure</li>
+        </ul>
+      </section>
+
+      <section class="mb-5">
+        <h3 class="h4 mb-3">4. Authentication and Verification</h3>
+        <p>
+          PrivyVote uses identity verification mechanisms as part of the voting workflow. Users may be required to
+          complete verification steps before being allowed to vote. Failure to satisfy verification requirements may
+          prevent participation in an election.
+        </p>
+      </section>
+
+      <section class="mb-5">
+        <h3 class="h4 mb-3">5. Voting Rules</h3>
+        <p>By participating in an election through this platform, you understand that:</p>
+        <ul>
+          <li>You may vote only once per election, subject to system validation</li>
+          <li>Votes cannot be modified after successful submission</li>
+          <li>Voting is allowed only during the defined election period</li>
+          <li>Election results are finalized according to the system’s tally process</li>
+        </ul>
+      </section>
+
+      <section class="mb-5">
+        <h3 class="h4 mb-3">6. Privacy and Data Handling</h3>
+        <p>
+          PrivyVote is designed to protect voter privacy through encrypted ballot handling and identity protection
+          mechanisms. Please review our
+          <a href="{% url 'privacy' %}" class="text-decoration-none">Privacy Policy</a>
+          for more details on how user information is handled.
+        </p>
+      </section>
+
+      <section class="mb-5">
+        <h3 class="h4 mb-3">7. Platform Integrity</h3>
+        <p>
+          Users must not attempt to bypass authentication, tamper with ballots, alter election data, abuse admin
+          functionality, or interfere with normal platform behavior. Any such activity may result in access restriction
+          or administrative action.
+        </p>
+      </section>
+
+      <section class="mb-5">
+        <h3 class="h4 mb-3">8. Academic Project Scope</h3>
+        <p>
+          PrivyVote is developed as an academic project for study, implementation, and demonstration of secure
+          electronic voting concepts. Platform features, workflows, and policies may evolve as the project is refined.
+        </p>
+      </section>
+
+      <section class="mb-5">
+        <h3 class="h4 mb-3">9. Availability and Changes</h3>
+        <p>
+          We may update, modify, suspend, or improve parts of the platform at any time to support system maintenance,
+          project development, security improvements, or election management needs.
+        </p>
+      </section>
+
+      <section class="mb-5">
+        <h3 class="h4 mb-3">10. Limitation of Responsibility</h3>
+        <p>
+          While the platform is designed with security and integrity goals, PrivyVote is provided within the scope of
+          an academic implementation. No guarantee is made that the system is suitable for unrestricted real-world
+          governmental or large-scale public deployment without further validation, testing, and compliance review.
+        </p>
+      </section>
+
+      <section class="mb-5">
+        <h3 class="h4 mb-3">11. Account Access and Restriction</h3>
+        <p>
+          Access to user or admin accounts may be limited, suspended, or removed in cases of misuse, suspicious
+          activity, rule violations, or actions that threaten election integrity or system security.
+        </p>
+      </section>
+
+      <section class="mb-0">
+        <h3 class="h4 mb-3">12. Contact</h3>
+        <p>
+          If you have questions about these terms, please
+          <a href="{% url 'contact' %}" class="text-decoration-none">contact us</a>.
+        </p>
+      </section>
+    </div>
+  </div>
+
+</article>
+{% endblock %}

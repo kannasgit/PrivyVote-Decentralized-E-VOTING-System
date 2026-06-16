@@ -1,0 +1,246 @@
+{% extends "base.html" %}
+
+{% block page %}
+
+<header class="bg-primary text-white py-4 mb-0">
+  <div class="container">
+    <h1 class="mb-0">{{ election.name }}</h1>
+    <p class="lead mb-0">{{ election.description }}</p>
+  </div>
+</header>
+
+{% include 'app/partials/breadcrumbs.html' %}
+
+<article class="container py-5">
+  <div class="row">
+    <div class="col-md-9">
+
+      {% if results_available and vote_results %}
+        <div class="mb-5">
+          <div class="mb-4">
+            <h3>Election Results</h3>
+            <small class="text-success">
+              Election closed on {{ election.closed_at|date:"M d, Y H:i" }}
+            </small>
+          </div>
+
+          <div class="card border-0 shadow-sm">
+            <div class="card-body">
+              <div class="mb-4">
+                <strong>Total Votes:</strong> {{ vote_results.total_votes }}<br>
+                <small class="text-success">Valid: {{ vote_results.valid_votes }}</small>
+                |
+                <small class="text-danger">Rejected: {{ vote_results.rejected_votes }}</small>
+              </div>
+
+              {% for result in vote_results.results %}
+                <div class="mb-4">
+                  <div class="d-flex justify-content-between mb-2">
+                    <div>
+                      <strong>
+                        {{ result.candidate.user.get_full_name|default:result.candidate.user.username }}
+                      </strong><br>
+                      <small class="text-muted">
+                        {{ result.candidate.party.name|default:"Independent" }}
+                      </small>
+                    </div>
+
+                    <div class="text-end">
+                      <strong>{{ result.votes }}</strong><br>
+                      <small>{{ result.percentage }}%</small>
+                    </div>
+                  </div>
+
+                  <div class="progress">
+                    <div
+                      class="progress-bar"
+                      role="progressbar"
+                      style="width: {{ result.percentage }}%;"
+                      aria-valuenow="{{ result.percentage }}"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
+              {% empty %}
+                <p class="text-muted mb-0">No valid votes recorded.</p>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="mb-5">
+        <h3>Candidates</h3>
+
+        {% if candidates %}
+          <div class="row">
+            {% for candidate in candidates %}
+              <div class="col-md-4 mb-3">
+                {% include 'app/partials/candidate_card.html' with candidate=candidate %}
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="alert alert-info">
+            No candidates available.
+          </div>
+        {% endif %}
+      </div>
+
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5>Status</h5>
+
+          {% if election_status == "registration_open" %}
+            <span class="badge bg-warning text-dark">Registration Open</span>
+          {% elif election_status == "open" %}
+            <span class="badge bg-primary">Voting Open</span>
+          {% elif election_status == "closed" %}
+            <span class="badge bg-success">Closed</span>
+          {% elif election_status == "scheduled" %}
+            <span class="badge bg-info text-dark">Scheduled</span>
+          {% elif election_status == "expired" %}
+            <span class="badge bg-dark">Expired</span>
+          {% else %}
+            <span class="badge bg-secondary">Inactive</span>
+          {% endif %}
+
+          <hr>
+
+          <p><strong>Total Votes:</strong> {{ election.votes.count }}</p>
+          <p><strong>Candidates:</strong> {{ candidates|length }}</p>
+
+          <p>
+            <strong>Voting Period:</strong><br>
+            {{ election.start_date }}<br>
+            to {{ election.end_date }}
+          </p>
+
+          {% if election.registration_opened_at %}
+            <p>
+              <strong>Registration Opened:</strong><br>
+              {{ election.registration_opened_at }}
+            </p>
+          {% endif %}
+
+          {% if election.registration_closed_at %}
+            <p>
+              <strong>Registration Closed:</strong><br>
+              {{ election.registration_closed_at }}
+            </p>
+          {% endif %}
+
+          <hr>
+
+          {# USER ACTIONS #}
+          {% if election_status == "registration_open" %}
+            <div class="alert alert-info py-2">
+              Registration is open. Voting is not available yet.
+            </div>
+            <a href="{% url 'voter_registration' election.uuid %}" class="btn btn-primary w-100">
+              Register
+            </a>
+
+          {% elif election_status == "open" %}
+
+            {% if voted %}
+              <div class="alert alert-success mb-0 py-2">
+                You have already voted.
+              </div>
+
+            {% elif is_verified %}
+              <div class="alert alert-info mb-2 py-2">
+                Verification completed. You may proceed to vote.
+              </div>
+              <a href="{% url 'vote' election.uuid %}" class="btn btn-success w-100">
+                Continue to Vote
+              </a>
+
+            {% else %}
+              <a href="{% url 'verify_voter' election.uuid %}" class="btn btn-success w-100">
+                Verify &amp; Vote
+              </a>
+            {% endif %}
+
+          {% elif election_status == "closed" %}
+            <div class="alert alert-secondary mb-0 py-2">
+              Election is closed.
+            </div>
+
+          {% elif election_status == "scheduled" %}
+            <div class="alert alert-secondary mb-0 py-2">
+              Registration and voting are not open yet.
+            </div>
+
+          {% elif election_status == "expired" %}
+            <div class="alert alert-secondary mb-0 py-2">
+              Election period has ended.
+            </div>
+
+          {% else %}
+            <div class="alert alert-secondary mb-0 py-2">
+              No action available right now.
+            </div>
+          {% endif %}
+
+          {% if can_edit %}
+            <hr>
+            <a href="{% url 'edit_election' election.uuid %}" class="btn btn-outline-secondary w-100">
+              Edit Election
+            </a>
+          {% endif %}
+
+          {# ADMIN / MANAGER ACTIONS #}
+          {% if can_manage %}
+            {% if not election.registration_open and not election.active and not election.closed_at %}
+              <hr>
+              <form method="post" action="{% url 'open_registration' election.uuid %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-warning w-100">
+                  Open Registration
+                </button>
+              </form>
+            {% endif %}
+
+            {% if election.registration_open %}
+              <hr>
+              <form method="post" action="{% url 'close_registration' election.uuid %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-warning w-100">
+                  Close Registration
+                </button>
+              </form>
+            {% endif %}
+
+            {% if not election.registration_open and not election.active and not election.closed_at %}
+              <hr>
+              <form method="post" action="{% url 'start_election' election.uuid %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success w-100">
+                  Start Election
+                </button>
+              </form>
+            {% endif %}
+
+            {% if election.active %}
+              <hr>
+              <form method="post" action="{% url 'close_election' election.uuid %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger w-100">
+                  Close Election
+                </button>
+              </form>
+            {% endif %}
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+{% endblock %}

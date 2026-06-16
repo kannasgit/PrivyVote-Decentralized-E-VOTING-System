@@ -1,0 +1,418 @@
+{% extends "base.html" %}
+
+{% block page %}
+<header class="bg-primary text-white py-5">
+  <div class="container">
+    <h1 class="mb-2">How It Works</h1>
+    <p class="mb-0">
+      Understanding our Decentralized E-Voting system with Aadhaar Salt Authentication and Homomorphic Vote Tallying
+    </p>
+  </div>
+</header>
+
+{% include 'app/partials/breadcrumbs.html' %}
+
+<section class="bg-white py-5">
+  <div class="container">
+    <h2 class="h3 fw-light mb-4">System Overview</h2>
+    <p class="lead text-muted mb-4">
+      Our project is a secure electronic voting system designed to protect voter privacy, prevent duplicate voting,
+      and ensure transparent final result publication without exposing individual ballot choices.
+    </p>
+
+    <div class="card border-0 shadow-sm bg-light">
+      <div class="card-body p-4">
+        <h4 class="h5 fw-semibold mb-3">Core Idea</h4>
+        <p class="mb-3">
+          Each voter is verified using a salted Aadhaar or VID-based identity check. After verification, the voter can cast
+          an encrypted ballot. The ballot remains encrypted during storage and aggregation.
+        </p>
+        <p class="mb-0">
+          Only the final combined result is decrypted once at the end of the election. Individual votes are never shown
+          in plaintext.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-light py-5">
+  <div class="container">
+    <h2 class="h3 fw-light mb-4">Voter Authentication</h2>
+
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body p-4">
+            <div class="d-flex align-items-center mb-3">
+              <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center me-3"
+                   style="width: 2.75rem; height: 2.75rem;">
+                <i class="bi bi-person-lock fs-6"></i>
+              </div>
+              <h4 class="h5 fw-semibold mb-0">What We Use</h4>
+            </div>
+            <ul class="list-unstyled mb-0">
+              <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>VID or Aadhaar-based identity verification</li>
+              <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Salted hashing for identity protection</li>
+              <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Eligibility validation before voting</li>
+              <li class="mb-0"><i class="bi bi-x-circle text-danger me-2"></i>No raw Aadhaar number stored as plaintext</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body p-4">
+            <div class="d-flex align-items-center mb-3">
+              <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center me-3"
+                   style="width: 2.75rem; height: 2.75rem;">
+                <i class="bi bi-shield-lock fs-6"></i>
+              </div>
+              <h4 class="h5 fw-semibold mb-0">Why It Matters</h4>
+            </div>
+            <ul class="list-unstyled mb-0">
+              <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Prevents duplicate voting</li>
+              <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Protects voter identity from direct exposure</li>
+              <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Maintains separation between voter and ballot</li>
+              <li class="mb-0"><i class="bi bi-check-circle text-success me-2"></i>Improves privacy compared to storing plain identity data</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-white py-5">
+  <div class="container">
+    <h2 class="h3 fw-light mb-4">Homomorphic Encryption</h2>
+    <p class="lead text-muted mb-4">
+      Our system uses additive homomorphic encryption so vote totals can be computed without reading individual votes.
+    </p>
+
+    <div class="card border-0 shadow-sm bg-light mb-4">
+      <div class="card-body p-4">
+        <h4 class="h5 fw-semibold mb-3">How Encryption Works</h4>
+        <p class="mb-3">
+          When a voter submits a ballot, the selected choice is converted into an encoded form and encrypted using the
+          election’s public key.
+        </p>
+        <p class="mb-0">
+          Encrypted ballots can be aggregated mathematically, and only the final combined tally is decrypted with the
+          private key after voting ends.
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-4 text-center">
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body p-4">
+            <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                 style="width: 3rem; height: 3rem;">
+              <i class="bi bi-lock fs-5"></i>
+            </div>
+            <h5 class="h6 fw-semibold">Ballot Encryption</h5>
+            <small class="text-muted">Each vote is encrypted before storage</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body p-4">
+            <div class="bg-warning text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                 style="width: 3rem; height: 3rem;">
+              <i class="bi bi-calculator fs-5"></i>
+            </div>
+            <h5 class="h6 fw-semibold">Encrypted Aggregation</h5>
+            <small class="text-muted">Votes are added while still encrypted</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body p-4">
+            <div class="bg-info text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                 style="width: 3rem; height: 3rem;">
+              <i class="bi bi-bar-chart fs-5"></i>
+            </div>
+            <h5 class="h6 fw-semibold">Final Decryption</h5>
+            <small class="text-muted">Only the final result is decrypted once</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-light py-5">
+  <div class="container">
+    <h2 class="h3 fw-light mb-4">Blockchain Audit Layer</h2>
+
+    <div class="card border-0 shadow-sm bg-white mb-4">
+      <div class="card-body p-4">
+        <h4 class="h5 fw-semibold mb-3">Why Blockchain Is Used</h4>
+        <p class="mb-0">
+          Blockchain is used in our project as an immutable audit layer. It helps ensure that recorded vote data and
+          election actions cannot be tampered with after submission.
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body p-4">
+            <h4 class="h5 fw-semibold mb-3">What It Provides</h4>
+            <ul class="list-unstyled mb-0">
+              <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Immutable storage record</li>
+              <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Transparent election audit trail</li>
+              <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Protection against vote modification</li>
+              <li class="mb-0"><i class="bi bi-check-circle text-success me-2"></i>Trust in final result publication</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body p-4">
+            <h4 class="h5 fw-semibold mb-3">What It Does Not Do</h4>
+            <ul class="list-unstyled mb-0">
+              <li class="mb-2"><i class="bi bi-x-circle text-danger me-2"></i>It does not reveal individual votes</li>
+              <li class="mb-2"><i class="bi bi-x-circle text-danger me-2"></i>It does not store voter identity in readable form</li>
+              <li class="mb-2"><i class="bi bi-x-circle text-danger me-2"></i>It does not replace encryption</li>
+              <li class="mb-0"><i class="bi bi-x-circle text-danger me-2"></i>It does not expose ballot-voter mapping</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-white py-5">
+  <div class="container">
+    <h2 class="h3 fw-light mb-4">Voting Process</h2>
+
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body p-4 d-flex">
+            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center me-3"
+                 style="width: 2.5rem; height: 2.5rem; min-width: 2.5rem;">
+              <span class="fw-bold">1</span>
+            </div>
+            <div>
+              <h4 class="h5 fw-semibold mb-2">Voter Verification</h4>
+              <p class="text-muted mb-0">
+                The voter is validated using Aadhaar or VID-related identity logic protected with salted hashing.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body p-4 d-flex">
+            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center me-3"
+                 style="width: 2.5rem; height: 2.5rem; min-width: 2.5rem;">
+              <span class="fw-bold">2</span>
+            </div>
+            <div>
+              <h4 class="h5 fw-semibold mb-2">Ballot Creation</h4>
+              <p class="text-muted mb-0">
+                The selected candidate is encoded into the ballot format required for encrypted tallying.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body p-4 d-flex">
+            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center me-3"
+                 style="width: 2.5rem; height: 2.5rem; min-width: 2.5rem;">
+              <span class="fw-bold">3</span>
+            </div>
+            <div>
+              <h4 class="h5 fw-semibold mb-2">Vote Encryption &amp; Storage</h4>
+              <p class="text-muted mb-0">
+                The ballot is encrypted and stored securely, with blockchain support for immutable recording.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body p-4 d-flex">
+            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center me-3"
+                 style="width: 2.5rem; height: 2.5rem; min-width: 2.5rem;">
+              <span class="fw-bold">4</span>
+            </div>
+            <div>
+              <h4 class="h5 fw-semibold mb-2">One-Time Final Tally</h4>
+              <p class="text-muted mb-0">
+                After the election closes, encrypted votes are aggregated and the final total is decrypted once.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-light py-5">
+  <div class="container">
+    <h2 class="h3 fw-light mb-4">Security Guarantees</h2>
+
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm border-start border-success border-4 h-100">
+          <div class="card-body p-4">
+            <h4 class="h5 fw-semibold text-success mb-3">
+              <i class="bi bi-shield-check me-2"></i>Privacy Protection
+            </h4>
+            <ul class="list-unstyled mb-0">
+              <li class="mb-2"><i class="bi bi-check text-success me-2"></i>No plaintext vote storage</li>
+              <li class="mb-2"><i class="bi bi-check text-success me-2"></i>No direct exposure of voter identity in ballot data</li>
+              <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Encrypted votes remain protected until tally</li>
+              <li class="mb-0"><i class="bi bi-check text-success me-2"></i>Final result only is revealed</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm border-start border-primary border-4 h-100">
+          <div class="card-body p-4">
+            <h4 class="h5 fw-semibold text-primary mb-3">
+              <i class="bi bi-eye me-2"></i>Integrity Assurance
+            </h4>
+            <ul class="list-unstyled mb-0">
+              <li class="mb-2"><i class="bi bi-check text-primary me-2"></i>Duplicate voting is prevented</li>
+              <li class="mb-2"><i class="bi bi-check text-primary me-2"></i>Votes cannot be altered after recording</li>
+              <li class="mb-2"><i class="bi bi-check text-primary me-2"></i>Election actions are auditable</li>
+              <li class="mb-0"><i class="bi bi-check text-primary me-2"></i>One-time tally reduces repeated result manipulation risk</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-white py-5">
+  <div class="container">
+    <h2 class="h3 fw-light mb-4">Technical Implementation</h2>
+
+    <div class="accordion" id="technicalAccordion">
+      <div class="accordion-item border-0 shadow-sm mb-3">
+        <h3 class="accordion-header">
+          <button class="accordion-button bg-light border-0 fw-semibold" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#encryptionDetails"
+                  aria-expanded="true" aria-controls="encryptionDetails">
+            <i class="bi bi-gear me-2"></i>Encryption and Tally
+          </button>
+        </h3>
+        <div id="encryptionDetails" class="accordion-collapse collapse show" data-bs-parent="#technicalAccordion">
+          <div class="accordion-body">
+            <p class="mb-3">
+              The system uses an additive homomorphic encryption approach so encrypted ballots can be combined without
+              exposing individual selections.
+            </p>
+            <ul class="list-unstyled mb-0">
+              <li class="mb-2"><i class="bi bi-arrow-right text-primary me-2"></i><strong>Key Generation:</strong> Election-specific public/private key pair</li>
+              <li class="mb-2"><i class="bi bi-arrow-right text-primary me-2"></i><strong>Ballot Encryption:</strong> Vote encoded and encrypted before storage</li>
+              <li class="mb-0"><i class="bi bi-arrow-right text-primary me-2"></i><strong>Final Tally:</strong> Aggregate decrypted only once after election closure</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item border-0 shadow-sm mb-3">
+        <h3 class="accordion-header">
+          <button class="accordion-button bg-light border-0 fw-semibold collapsed" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#authDetails"
+                  aria-expanded="false" aria-controls="authDetails">
+            <i class="bi bi-person-badge me-2"></i>Authentication Logic
+          </button>
+        </h3>
+        <div id="authDetails" class="accordion-collapse collapse" data-bs-parent="#technicalAccordion">
+          <div class="accordion-body">
+            <p class="mb-3">
+              Voter authentication is based on identity verification using salted hashing to reduce exposure of sensitive identifiers.
+            </p>
+            <ul class="list-unstyled mb-0">
+              <li class="mb-2"><i class="bi bi-arrow-right text-success me-2"></i><strong>Identity Protection:</strong> Salted hash used instead of raw identity storage</li>
+              <li class="mb-2"><i class="bi bi-arrow-right text-success me-2"></i><strong>Eligibility Check:</strong> Only verified voters are allowed to vote</li>
+              <li class="mb-0"><i class="bi bi-arrow-right text-success me-2"></i><strong>Duplicate Prevention:</strong> One voter can cast only one valid ballot per election</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item border-0 shadow-sm">
+        <h3 class="accordion-header">
+          <button class="accordion-button bg-light border-0 fw-semibold collapsed" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#blockchainDetails"
+                  aria-expanded="false" aria-controls="blockchainDetails">
+            <i class="bi bi-diagram-3 me-2"></i>Blockchain Integration
+          </button>
+        </h3>
+        <div id="blockchainDetails" class="accordion-collapse collapse" data-bs-parent="#technicalAccordion">
+          <div class="accordion-body">
+            <p class="mb-3">
+              Blockchain is integrated to provide an immutable record of election-related data and improve trust in result integrity.
+            </p>
+            <ul class="list-unstyled mb-0">
+              <li class="mb-2"><i class="bi bi-arrow-right text-warning me-2"></i><strong>Immutable Logging:</strong> Votes and results are protected from later tampering</li>
+              <li class="mb-2"><i class="bi bi-arrow-right text-warning me-2"></i><strong>Auditability:</strong> Election process can be traced for verification</li>
+              <li class="mb-0"><i class="bi bi-arrow-right text-warning me-2"></i><strong>Transparency:</strong> Final result publication is supported by trustworthy records</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-light py-5">
+  <div class="container">
+    <div class="card border-0 shadow-sm bg-primary text-white">
+      <div class="card-body p-4 p-md-5 text-center">
+        <h2 class="h3 fw-light mb-3">Experience Secure Digital Voting</h2>
+        <p class="mb-4">
+          Our system combines identity protection, encrypted ballots, immutable records, and one-time secure tallying
+          to make digital elections more trustworthy.
+        </p>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+          {% if request.user.is_authenticated %}
+            <a href="{% url 'election_list' %}" class="btn btn-light btn-lg">
+              <i class="bi bi-shield-check me-2"></i>View Elections
+            </a>
+            <a href="{% url 'faqs' %}" class="btn btn-outline-light btn-lg">
+              <i class="bi bi-question-circle me-2"></i>Learn More
+            </a>
+          {% else %}
+            <a href="{% url 'account_login' %}" class="btn btn-light btn-lg">
+              <i class="bi bi-box-arrow-in-right me-2"></i>Get Started
+            </a>
+            <a href="{% url 'faqs' %}" class="btn btn-outline-light btn-lg">
+              <i class="bi bi-info-circle me-2"></i>Read FAQs
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

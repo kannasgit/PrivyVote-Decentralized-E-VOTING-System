@@ -1,0 +1,39 @@
+{% if page_obj and page_obj.paginator.num_pages > 1 %}
+<nav aria-label="{{ aria_label|default:'Pagination' }}" class="mt-4">
+  <ul class="pagination justify-content-center">
+
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link link-dark" href="?page=1" aria-label="First">&laquo;&laquo;</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link link-dark" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">&laquo;</a>
+      </li>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if num >= page_obj.number|add:'-2' and num <= page_obj.number|add:'2' %}
+        {% if num == page_obj.number %}
+          <li class="page-item active" aria-current="page">
+            <span class="page-link">{{ num }}</span>
+          </li>
+        {% else %}
+          <li class="page-item">
+            <a class="page-link link-dark" href="?page={{ num }}">{{ num }}</a>
+          </li>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link link-dark" href="?page={{ page_obj.next_page_number }}" aria-label="Next">&raquo;</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link link-dark" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">&raquo;&raquo;</a>
+      </li>
+    {% endif %}
+
+  </ul>
+</nav>
+{% endif %}

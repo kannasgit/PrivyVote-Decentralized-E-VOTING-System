@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Paillier JS Test</title>
+</head>
+<body>
+
+<h2>Paillier JS Encryption Test</h2>
+<button onclick="encryptValue()">Encrypt 1</button>
+
+<p id="output"></p>
+
+<script type="module">
+    import { PublicKey } from "https://cdn.jsdelivr.net/npm/paillier-bigint@3.4.3/+esm";
+
+    async function encryptValue() {
+
+        // Load public key from Django static file later
+        const n = BigInt("120481495240151361845187974297287246935829314122974423278931012449086585452090205379806903353144395042824299959360257527681603607220951691885199786692284321078432420485816874524664543858705236185846185134571418717150554509168736689394543343751617621236580766788501463925157674983746577771815837780455541113383");
+        const g = BigInt("120481495240151361845187974297287246935829314122974423278931012449086585452090205379806903353144395042824299959360257527681603607220951691885199786692284321078432420485816874524664543858705236185846185134571418717150554509168736689394543343751617621236580766788501463925157674983746577771815837780455541113384");
+
+        const publicKey = new PublicKey(n, g);
+
+        const message = 1n;
+
+        const ciphertext = publicKey.encrypt(message);
+
+        const hexCipher = ciphertext.toString(16);
+
+        document.getElementById("output").innerText =
+            "Cipher (hex): " + hexCipher;
+
+        console.log("Cipher (hex):", hexCipher);
+    }
+
+    window.encryptValue = encryptValue;
+</script>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block page %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+
+          <h2 class="mb-4 text-center">Login</h2>
+
+          <form method="post" action="{% url 'account_login' %}">
+            {% csrf_token %}
+
+            {% if form.errors %}
+              <div class="alert alert-danger">
+                {% for field in form %}
+                  {% for error in field.errors %}
+                    <div><strong>{{ field.name }}</strong>: {{ error }}</div>
+                  {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                  <div>{{ error }}</div>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            {% for hidden in form.hidden_fields %}
+              {{ hidden }}
+            {% endfor %}
+
+            {% for field in form.visible_fields %}
+              <div class="mb-3">
+                <label for="{{ field.id_for_label }}" class="form-label">
+                  {{ field.label }}
+                </label>
+                {{ field }}
+              </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-primary w-100">
+              Sign in
+            </button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

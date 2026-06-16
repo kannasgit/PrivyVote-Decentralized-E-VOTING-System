@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Contact - PrivyVote{% endblock %}
+
+{% block page %}
+<!-- Page Header -->
+<header class="bg-primary text-white py-4 mb-0">
+  <div class="container">
+    <h1 class="mb-0">Contact</h1>
+    <p class="mb-0">
+      Have questions, feedback, or issues related to PrivyVote? Reach out through the form below.
+    </p>
+  </div>
+</header>
+
+{% include 'app/partials/breadcrumbs.html' %}
+
+<!-- Content -->
+<article class="container py-5">
+
+  <div class="row g-4">
+
+    <!-- Form -->
+    <div class="col-md-8">
+      <div class="card border-0">
+        <div class="card-header border-0">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-envelope me-2"></i>Send a Message
+          </h5>
+        </div>
+
+        <div class="card-body p-4">
+          <p class="mb-4">
+            Use this form to report issues, ask questions, or provide feedback about the system.
+          </p>
+
+          <form method="post">
+            {% csrf_token %}
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" name="name" required>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" required>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">Subject</label>
+                <select class="form-select" name="subject" required>
+                  <option value="">Select a topic</option>
+                  <option value="technical">Technical Issue</option>
+                  <option value="voting">Voting Question</option>
+                  <option value="account">Account Issue</option>
+                  <option value="security">Security Concern</option>
+                  <option value="feedback">Feedback</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">Message</label>
+                <textarea class="form-control" name="message" rows="8" required></textarea>
+              </div>
+
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary">
+                  <i class="bi bi-send me-2"></i>Submit
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Side Info -->
+    <div class="col-md-4">
+
+      <div class="card mb-4 border-0">
+        <div class="card-header border-0">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-info-circle me-2"></i>About Contact
+          </h5>
+        </div>
+
+        <div class="card-body">
+          <p class="mb-0 text-muted">
+            This platform is an academic project. Responses may not be immediate,
+            and support is limited to project scope and demonstration.
+          </p>
+        </div>
+      </div>
+
+      <div class="card mb-4 border-0">
+        <div class="card-header border-0">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-clock me-2"></i>Response
+          </h5>
+        </div>
+
+        <div class="card-body">
+          <p class="mb-0 text-muted">
+            Responses depend on project availability and are not guaranteed within a fixed timeframe.
+          </p>
+        </div>
+      </div>
+
+      <div class="card border-0">
+        <div class="card-header border-0">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-question-circle me-2"></i>Need Help?
+          </h5>
+        </div>
+
+        <div class="card-body text-center">
+          <p class="mb-3">Check FAQs for common answers</p>
+          <a href="{% url 'faqs' %}" class="btn btn-outline-primary">
+            View FAQs
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</article>
+{% endblock %}
