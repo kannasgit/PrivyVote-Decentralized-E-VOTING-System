@@ -1,4 +1,4 @@
-# Intikhab - Electronic Voting System
+# PrivyVote - Blockchain E-Voting System
 
 A comprehensive secure electronic voting platform built with Django 5.2.6, featuring homomorphic encryption, modern UI/UX, and robust election management capabilities. Intikhab ensures transparency and privacy in democratic elections through advanced cryptographic techniques and professional-grade architecture.
 
